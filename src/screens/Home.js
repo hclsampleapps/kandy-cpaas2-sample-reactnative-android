@@ -65,6 +65,8 @@ export default class Home extends Component {
 
     onButtonPress = (value) => {
         console.log("Button value ", value);
+        //this.props.navigation.navigate('AndroidCall');
+        //return;
         
         if (this.state.initilized) {
 
@@ -76,6 +78,8 @@ export default class Home extends Component {
                 this.props.navigation.navigate('AddressBook');
             } else if (value === 'presence') {
                 this.props.navigation.navigate('Presence');
+            } else if (value === 'call') {
+                this.props.navigation.navigate('Call');
             }
             else {
                 ToastAndroid.show('Coming Soon', ToastAndroid.SHORT);
@@ -145,7 +149,14 @@ export default class Home extends Component {
                         accessibilityLabel="Learn more about this purple button"
                     />
                 </View>
-                
+                <View style={{ padding: 10 }}>
+                    <Button
+                        onPress={() => this.onButtonPress('call')}
+                        title="Call"
+                        color="#841584"
+                        accessibilityLabel="Learn more about this purple button"
+                    />
+                </View>
             </View>
         );
     }
