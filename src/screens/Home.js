@@ -14,15 +14,21 @@ export default class Home extends Component {
 
     constructor(props) {
         super(props);
-        this.state = { isLoading: false };
+        this.state = { isLoading: false, initilized: false };
         this.initKandy = this.initKandy.bind(this);
     }
-    
+
     componentWillMount() {
+
+        this.onInitilised();
+
+    }
+
+    onInitilised = () => {
 
         localStorage.getTokenData().then((data) => {
             let response = JSON.parse(data);
-            console.log("home local response",response);
+            console.log("home local response", response);
             let accessToken = response.access_token;
             let idToken = response.id_token;
 
@@ -35,6 +41,7 @@ export default class Home extends Component {
 
     }
 
+
     initKandy = (baseUrl, accessToken, idToken) => {
         console.log("baseUrl ", baseUrl);
         console.log("accessToken " + accessToken);
@@ -43,12 +50,14 @@ export default class Home extends Component {
         KandyCpassLib.initKandyService(String(baseUrl), String(accessToken), String(idToken))
             .then((response) => {
                 this.setState({ isLoading: false });
-                console.log("SMS response", response);
+                this.setState({ initilized: true });
+                console.log("initilization response", response);
                 ToastAndroid.show('Successful initilization', ToastAndroid.SHORT);
             })
             .catch((err) => {
                 this.setState({ isLoading: false });
-                console.log(9999, err)
+                this.setState({ initilized: false });
+                console.log(9999, err.message)
                 ToastAndroid.show('Try Again', ToastAndroid.SHORT);
             })
 
@@ -56,17 +65,36 @@ export default class Home extends Component {
 
     onButtonPress = (value) => {
         console.log("Button value ", value);
-        if (value === 'sms') {
-            this.props.navigation.navigate('Sms');
-        } else if (value === 'chat') {
-            this.props.navigation.navigate('Chat');
-        }else if (value === 'addressBook') {
-            this.props.navigation.navigate('AddressBook');
-        }else if (value === 'presence') {
-            this.props.navigation.navigate('Presence');
-        }
-        else {
-            ToastAndroid.show('Coming Soon', ToastAndroid.SHORT);
+        
+        if (this.state.initilized) {
+
+            if (value === 'sms') {
+                this.props.navigation.navigate('Sms');
+            } else if (value === 'chat') {
+                this.props.navigation.navigate('Chat');
+            } else if (value === 'addressBook') {
+                this.props.navigation.navigate('AddressBook');
+            } else if (value === 'presence') {
+                this.props.navigation.navigate('Presence');
+            }
+            else {
+                ToastAndroid.show('Coming Soon', ToastAndroid.SHORT);
+            }
+        }else{
+
+            Alert.alert(
+                'Alert',
+                'Please subscribe',
+                [
+                  {
+                    text: 'Cancel',
+                    onPress: () => console.log('Cancel Pressed'),
+                    style: 'cancel',
+                  },
+                  {text: 'OK', onPress: () => this.onInitilised()},
+                ],
+                {cancelable: false},
+              );
         }
     }
 
@@ -117,6 +145,7 @@ export default class Home extends Component {
                         accessibilityLabel="Learn more about this purple button"
                     />
                 </View>
+                
             </View>
         );
     }
