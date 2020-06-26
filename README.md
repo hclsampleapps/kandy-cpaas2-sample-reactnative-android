@@ -8,8 +8,8 @@ This app is used to establish a communication channel between 2 or more users vi
 - [x] SMS
 - [x] Chat
 - [ ] Voice/Video
-- [x] Address-book & Directory
-- [x] Presence
+- [ ] Address-book & Directory
+- [ ] Presence
 
 ## Getting Started
 

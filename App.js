@@ -1,160 +1,266 @@
+
 /**
  * Sample React Native App
  * https://github.com/facebook/react-native
  *
  * @format
- * @flow
+ * @flow strict-local
  */
 
 import React, { Component } from 'react';
-import { Platform, Alert, StyleSheet, Text, View, ActivityIndicator } from 'react-native';
-import { ToastAndroid } from 'react-native';
-import Spinner from 'react-native-loading-spinner-overlay';
-import Login from './src/components/Login';
-import localStorage from './src/utility/LocalStorage';
+import 'react-native-gesture-handler';
 
-const instructions = Platform.select({
-  ios: 'Press Cmd+R to reload,\n' + 'Cmd+D or shake for dev menu',
-  android:
-    'Double tap R on your keyboard to reload,\n' +
-    'Shake or press menu button for dev menu',
-});
+import {NavigationContainer} from '@react-navigation/native';
+import {createStackNavigator} from '@react-navigation/stack';
+import Login from './Screens/Login';
+import { NativeModules } from 'react-native';
+import DashBoard from './Screens/DashBoard';
+import Chat from './Screens/Chat';
+import SMS from './Screens/SMS';
+import AddressBook from './Screens/AddressBook';
+const Stack = createStackNavigator();
 
-export default class App extends Component {
-
-  static navigationOptions = {
-    header: null
-  }
-
-  constructor(props) {
-    super(props);
-    this.state = { isLoading: false };
-  }
-
-  onLoginForm = (loginComponentData) => {
-    //Alert.alert(JSON.stringify(loginComponentData));
-    console.log('loginComponentData' + JSON.stringify(loginComponentData));
-    this.setState({ isLoading: true });
-    this.callLoginApi(loginComponentData).then((result) => {
-      console.log("Inside", result);
-      this.setState({ isLoading: false });
-
-      if (result.status == 200) {
-        let response = result.json().then(value => {
-          localStorage.setTokenData(JSON.stringify(value));        
-        });
-        
-        ToastAndroid.show('Login Successfully', ToastAndroid.SHORT);
-        this.props.navigation.navigate('Home');
-
-      } else {
-        result.json().then(value => {
-          //console.log("error value", value);
-          ToastAndroid.show(value.error_description, ToastAndroid.SHORT);
-        })
-      }
-
-
-    });
-  }
-
-  callLoginApi = (loginComponentData) => {
-
-    console.log('username' + loginComponentData.username);
-    let baseUrl = "https://" + loginComponentData.baseurl + "/cpaas/auth/v1/token"
-    console.log('baseUrl ' + baseUrl);
-    localStorage.setBaseUrl(loginComponentData.baseurl);
-
-    let details = {
-      username: loginComponentData.username,
-      password: loginComponentData.password,
-      client_id: loginComponentData.clientId,
-      grant_type: "password",
-      scope: "openid",
-    };
-
-    let formBody = [];
-    for (let property in details) {
-      let encodedKey = encodeURIComponent(property);
-      let encodedValue = encodeURIComponent(details[property]);
-      formBody.push(encodedKey + "=" + encodedValue);
-    }
-    formBody = formBody.join("&")
-
-    let data = {
-      method: 'POST',
-      body: formBody,
-      headers: {
-        'Content-Type': 'application/x-www-form-urlencoded'
-      }
-    }
-
-    return fetch(baseUrl, data).then(function (response) {
-      //console.log("response ", response);
-      //Alert.alert("response " + JSON.stringify(response));
-      return response;
-
-    }).then(function (result) {
-      // console.log(result);
-      //console.log("result", result);
-      // Alert.alert("result " + JSON.stringify(result));
-      return result;
-
-    }).catch(function (error) {
-      console.log("-------- error ------- " + error);
-      alert("result:" + error)
-    });
-  }
-
-  renderProgressbar() {
-
-    return (
-      <Spinner
-        visible={this.state.isLoading}
-        textContent={'Loading...'}
-        textStyle={styles.spinnerTextStyle}
+export default class App extends Component{ 
+  render() 
+  {
+  return (   
+    <NavigationContainer>
+    <Stack.Navigator>
+      <Stack.Screen
+        name="Login"
+        options={{
+          title: 'Login',
+          headerStyle: {
+            backgroundColor: '#0391C2',
+          },
+          headerTintColor: '#fff',
+          headerTitleStyle: {
+            fontWeight: 'bold',
+          },
+        }}
+        component={Login}
       />
-    );
-  }
+       <Stack.Screen
+        name="DashBoard"
+        options={{
+          title: 'DashBoard',
+          headerStyle: {
+            backgroundColor: '#0391C2',
+          },
+          headerTintColor: '#fff',
+          headerTitleStyle: {
+            fontWeight: 'bold',
+          },
+        }}
+        component={DashBoard}
+      />
+      <Stack.Screen
+        name="SMS"
+        options={{
+          title: 'SMS',
+          headerStyle: {
+            backgroundColor: '#0391C2',
+          },
+          headerTintColor: '#fff',
+          headerTitleStyle: {
+            fontWeight: 'bold',
+          },
+        }}
+        component={SMS}
+      />
+        <Stack.Screen
+        name="Chat"
+        options={{
+          title: 'Chat',
+          headerStyle: {
+            backgroundColor: '#0391C2',
+          },
+          headerTintColor: '#fff',
+          headerTitleStyle: {
+            fontWeight: 'bold',
+          },
+        }}
+        component={Chat}
+      />
+        <Stack.Screen
+        name="AddressBook"
+        options={{
+          title: 'AddressBook',
+          headerStyle: {
+            backgroundColor: '#0391C2',
+          },
+          headerTintColor: '#fff',
+          headerTitleStyle: {
+            fontWeight: 'bold',
+          },
+        }}
+        component={AddressBook}
+      />
 
-  render() {
-    const { navigate } = this.props.navigation;
-    return (
-      <View style={styles.container}>
-        {this.renderProgressbar()}
-        <Login onLoginForm={this.onLoginForm} />
-      </View>
-    );
+    </Stack.Navigator>
+    </NavigationContainer>      
+  );
   }
+  
 }
+  
 
-const styles = StyleSheet.create({
-  spinnerTextStyle: {
-    color: '#0000ff'
-  },
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#F5FCFF',
-  },
-  welcome: {
-    fontSize: 20,
-    textAlign: 'center',
-    margin: 10,
-  },
-  instructions: {
-    textAlign: 'center',
-    color: '#333333',
-    marginBottom: 5,
-  },
-  spinnerContainer: {
-    flex: 1,
-    justifyContent: 'center'
-  },
-  horizontal: {
-    flexDirection: 'row',
-    justifyContent: 'space-around',
-    padding: 10
-  }
-});
+
+
+// export default class App extends Component {
+//   constructor(props) {
+//     super(props);
+//      DeviceEventEmitter.addListener('CallReceived', (event) => this.onCallReceive(event));
+
+//   }
+// onCallReceive = (event) => {
+//   console.log("Call Received event ", event);
+// };
+//   state = {
+//     email: '',
+//     password: '',
+//     clientId: '',
+//   }
+//   handleEmail = (text) => {
+//     this.state.email = text
+//   }
+
+//   handlePassword = (text) => {
+//     this.state.password = text
+//   }
+
+//   handleClientId = (text) => {
+//     this.state.clientId = text
+//   }
+//   render() {
+//     return (
+//       <View style={styles.container}>
+//           <View 
+//       style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+//       <VideoView style={{ flex: 1, width: '100%', height: '100%' }}       
+//       url="https://www.radiantmediaplayer.com/media/bbb-360p.mp4" /> 
+//       </View>
+
+
+//         <TextInput style={styles.input}
+//           placeholder="Client Id"
+//           placeholderTextColor="black"
+//           autoCapitalize="none"
+//           // value = "PUB-nesonukuv.34mv"
+//           onChangeText={this.handleClientId}
+//         />
+//         <TextInput style={styles.input}
+//           placeholder="Email"
+//           // value = "nesonukuv@planet-travel.club"
+//           placeholderTextColor="black"
+//           autoCapitalize="none"
+//           onChangeText={this.handleEmail}
+//         />
+//         <TextInput style={styles.input}
+//           placeholder="Password"
+//           // value = "Test@123"
+//           placeholderTextColor="black"
+//           autoCapitalize="none"
+//           onChangeText={this.handlePassword}
+//         />
+//         <View style={{ margin: 10 }}>
+//           <Button onPress={this.onLogin} title="Login Btn" />
+//         </View>
+//         <View style={{ margin: 10 }}>
+//           <Button style={styles.buttonStyle} onPress={requestCameraPermission} title="Accept Permission" />
+//         </View>
+        
+//       </View>
+//     );
+//   }
+
+//   onLogin = () => {
+//     console.log("Login API");
+//     this.callLoginApi().then((result) => {
+//       console.log("Inside", result);
+//       if (result.status == 200) {
+//         let response = result.json().then(value => {
+//           KandyModule.initKandyService("oauth-cpaas.att.com", value.access_token, value.id_token)
+
+//         });
+//       } else {
+//         result.json().then(value => {
+//         })
+//       }
+
+
+//     });
+//   }
+
+
+//   callLoginApi = () => {
+//     let baseUrl = "https://oauth-cpaas.att.com/cpaas/auth/v1/token"
+
+//     let details = {
+//       username: this.state.email,// "nesonukuv1@planet-travel.club",
+//       password: this.state.password,// "Test@123",
+//       client_id: this.state.clientId,//"PUB-nesonukuv.34mv",
+//       grant_type: "password",
+//       scope: "openid",
+//     };
+
+//     let formBody = [];
+//     for (let property in details) {
+//       let encodedKey = encodeURIComponent(property);
+//       let encodedValue = encodeURIComponent(details[property]);
+//       formBody.push(encodedKey + "=" + encodedValue);
+//     }
+//     formBody = formBody.join("&")
+
+//     let data = {
+//       method: 'POST',
+//       body: formBody,
+//       headers: {
+//         'Content-Type': 'application/x-www-form-urlencoded'
+//       }
+//     }
+
+//     return fetch(baseUrl, data).then(function (response) {
+//       return response;
+
+//     }).then(function (result) {
+//       return result;
+
+//     }).catch(function (error) {
+//       console.log("-------- error ------- " + error);
+//       alert("result:" + error)
+//     });
+//   }
+
+// }
+// const styles = StyleSheet.create({
+//   Welcome_text: {
+//     marginTop: 10,
+//     marginBottom: 0,
+//     marginLeft: 20,
+//     fontSize: 25,
+//     fontWeight: 'bold'
+//   },
+//   Login_text: {
+//     marginTop: 0,
+//     padding: 20,
+//     fontSize: 17,
+//     fontWeight: 'normal'
+//   },
+//   input: {
+//     margin: 15,
+//     height: 40,
+//     borderColor: 'black',
+//     borderWidth: 1,
+//     borderRadius: 5,
+//     borderColor: 'gray'
+//   },
+//   buttonStyle: {
+//     marginTop: 20,
+//     marginBottom: 20,
+//     padding: 20,
+//     borderRadius: 10,
+//     borderColor: 'black',
+//     flex: 60
+//   }
+// });
