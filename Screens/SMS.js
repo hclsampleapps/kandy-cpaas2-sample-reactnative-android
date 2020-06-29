@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 
 import {
     StyleSheet,
-    View,
+    View, Text,
     NativeModules,
     Button,
     TextInput,
@@ -10,8 +10,6 @@ import {
 } from 'react-native';
 
 const { SMSModule } = NativeModules;
-// var smsManager = NativeModules.SMS;
-// var smsEvents = new NativeEventEmitter(NativeModules.SMS)
 
 class SMS extends React.Component {
     static navigationOptions = {
@@ -19,42 +17,30 @@ class SMS extends React.Component {
     };
 
     state = {
-        sourceNumber: '+15205829010',
-        destinationNumber: '+12015644538',
-        messageText: 'Hi'
+        sourceNumber: '',
+        destinationNumber: '',
+        messageText: ''
     }
 
-      constructor(props) {
-    super(props);
-     DeviceEventEmitter.addListener('SMSmessageReceived', (event) => this.onSMSReceive(event));
+    constructor(props) {
+        super(props);
+        DeviceEventEmitter.addListener('SMSmessageReceived', (event) => this.onSMSReceive(event));
+    }
 
-  }
-  onSMSReceive = (event) => {
-    alert('Message Received Successfully!');
-};
-
-    // smsEvents = smsEvents.addListener(
-    //     "messageReceived",
-    //     res => {
-    //         if (res != null) {
-    //             alert('Message Received Successfully!');
-    //         }
-    //     }
-    // )
+    onSMSReceive = (event) => {
+        alert('Message Received Successfully!');
+    };
 
     componentDidMount() {
         SMSModule.initSMSModule((error, message) => {
-           
-            if (error =='Success') {
+
+            if (error == 'Success') {
                 console.log(message);
-               
+
             } else {
                 console.log(message);
-             
+
             }
-             //if (error == null) {
-         //       console.log("SMS module initialize");
-            // }
         });
     }
 
@@ -71,37 +57,55 @@ class SMS extends React.Component {
     }
 
     handleSMS = () => {
-        SMSModule.initSendMessage(this.state.destinationNumber, this.state.sourceNumber, this.state.messageText, (error, message) => {
-            if (error =='Success') {
-                console.log(message);
-                alert(message);
-            } else {
-                console.log(message);
-                alert(message);
-            }
-        });
+
+
+        if (this.state.destinationNumber && this.state.sourceNumber && this.state.messageText != "") {
+            this.showLoader();
+            //   var loginManager = NativeModules.login;
+      
+            SMSModule.initSendMessage(this.state.destinationNumber, this.state.sourceNumber, this.state.messageText, (error, message) => {
+                if (error == 'Success') {
+                    console.log(message);
+                    alert(message);
+                } else {
+                    console.log(message);
+                    alert(message);
+                }
+            });
+          } else {
+            alert('Please fill all the details.');
+          }
+
+
+      
     }
 
     render() {
         return (
             <View>
-
+                <Text style={styles.Normal_text}>
+                    Source Number
+                  </Text>
                 <TextInput style={styles.input}
-                    placeholder="Source number"
+                    placeholder="Example. +12011234567"
                     placeholderTextColor="black"
                     autoCapitalize="none"
                     onChangeText={this.handleSourceNumber}
                 />
-
+                <Text style={styles.Normal_text}>
+                    Destination Number
+                  </Text>
                 <TextInput style={styles.input}
-                    placeholder="Destination number"
+                    placeholder="Example. +12011234567"
                     placeholderTextColor="black"
                     autoCapitalize="none"
                     onChangeText={this.handleDestinationNumber}
                 />
-
+                <Text style={styles.Normal_text}>
+                    Enter Message
+                  </Text>
                 <TextInput style={styles.input}
-                    placeholder="Enter the text"
+                    placeholder="Example. Hi John"
                     placeholderTextColor="black"
                     autoCapitalize="none"
                     onChangeText={this.handleMessageText}
@@ -128,6 +132,14 @@ const styles = StyleSheet.create({
         marginTop: 0,
         padding: 20,
         fontSize: 17,
+        fontWeight: 'normal'
+    }, Normal_text: {
+        marginTop: 0,
+        paddingTop: 0,
+        paddingBottom: 0,
+        paddingLeft: 20,
+        paddingRight: 0,
+        fontSize: 14,
         fontWeight: 'normal'
     },
     input: {

@@ -1,6 +1,4 @@
-package com.awesomeproject;
-
-import android.util.Log;
+package com.kandycpaas;
 
 import com.facebook.react.bridge.ReactApplicationContext;
 import com.facebook.react.bridge.ReactContextBaseJavaModule;
@@ -15,8 +13,6 @@ import com.rbbn.cpaas.mobile.messaging.chat.api.ChatGroupParticipant;
 import com.rbbn.cpaas.mobile.messaging.chat.api.ChatListener;
 import com.rbbn.cpaas.mobile.messaging.chat.api.ChatService;
 import com.rbbn.cpaas.mobile.utilities.exception.MobileError;
-
-import java.util.List;
 
 public class ChatModule extends ReactContextBaseJavaModule {
     ReactApplicationContext context;
@@ -41,13 +37,13 @@ public class ChatModule extends ReactContextBaseJavaModule {
         chatConversation.send(message, new MessagingCallback() {
             @Override
             public void onSuccess() {
-                Log.d("CPaaS.ChatService", "Message is sent");
+                android.util.Log.d("CPaaS.ChatService", "Message is sent");
                 successCallback.invoke("Success", "Message is sent");
             }
 
             @Override
             public void onFail(MobileError error) {
-                Log.d("CPaaS.ChatService", "Message is failed");
+                android.util.Log.d("CPaaS.ChatService", "Message is failed");
                 successCallback.invoke("Success", "Message is failed");
             }
         });
@@ -72,7 +68,7 @@ public class ChatModule extends ReactContextBaseJavaModule {
 
             @Override
             public void chatDeliveryStatusChanged(String s, String s1, String s2) {
-                Log.d("CPaaS.ChatService", "Message delivery status changed to " + s1);
+                android.util.Log.d("CPaaS.ChatService", "Message delivery status changed to " + s1);
             }
 
             @Override
@@ -91,7 +87,7 @@ public class ChatModule extends ReactContextBaseJavaModule {
             }
 
             @Override
-            public void groupChatSessionInvitation(List<ChatGroupParticipant> list, String s, String s1) {
+            public void groupChatSessionInvitation(java.util.List<ChatGroupParticipant> list, String s, String s1) {
 
             }
 

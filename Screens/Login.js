@@ -6,49 +6,20 @@ import {
   NativeModules,
   TextInput,
   ActivityIndicator,
-  PermissionsAndroid,
   Button
 } from 'react-native';
-import SMS from './SMS'
-import DashBoard from './DashBoard'
-import UpdateContact from './UpdateContact'
-const requestCameraPermission = async () => {
-  try {
-    const granted = await PermissionsAndroid.requestMultiple([
-      // PermissionsAndroid.PERMISSIONS.MODIFY_AUDIO_SETTINGS,
-      PermissionsAndroid.PERMISSIONS.RECORD_AUDIO,
-      PermissionsAndroid.PERMISSIONS.CAMERA,
-      PermissionsAndroid.PERMISSIONS.WRITE_EXTERNAL_STORAGE,
-      PermissionsAndroid.PERMISSIONS.READ_EXTERNAL_STORAGE
-    ]);
-    if (granted === PermissionsAndroid.RESULTS.GRANTED) {
-      // console.log("You can use the camera");
-    } else {
-      // console.log("Camera permission denied");
-    }
-  } catch (err) {
-    console.warn(err);
-  }
-};
+
 const { LoginModule } = NativeModules;
 class Login extends React.Component {
-  // constructor(props) {
-  //   super(props);
-  //   DeviceEventEmitter.addListener('CallReceived', (event) => this.onCallReceive(event));
-
-  // }
-  // onCallReceive = (event) => {
-  //   console.log("Call Received event ", event);
-  // };
   static navigationOptions = {
     title: 'Login',
   };
 
   state = {
-    email: 'nesonukuv@planet-travel.club',
-    password: 'Test@123',
+    email: '',
+    password: '',
     url: 'oauth-cpaas.att.com',
-    clientId: 'PUB-nesonukuv.34mv',
+    clientId: '',
     sourceNumber: '',
     destinationNumber: '',
     showLoader: false
@@ -74,50 +45,24 @@ class Login extends React.Component {
   }
 
   handleLogin = () => {
-    if (this.state.clientId && this.state.password && this.state.email != "") {
+    if ( this.state.url && this.state.clientId && this.state.password && this.state.email != "") {
       this.showLoader();
       //   var loginManager = NativeModules.login;
 
       LoginModule.initLogin(this.state.clientId, this.state.password, this.state.email, this.state.url
-        , (status,message) => {
-          console.log(message);
-          this.hideLoader();
-          this.props.navigation.navigate('DashBoard')
+        , (status, message) => {
+          if (status == 'Success') {
+            console.log(message);
+            this.hideLoader();
+            this.props.navigation.navigate('DashBoard')
+
+        } else {
+            console.log(message);
+            this.hideLoader();
+            alert(message);
+        }
+        
         });
-
-    //     .then((response) => {
-    //     // this.setState({ isLoading: false });
-    //     console.log(response);
-    //     this.hideLoader();// this.props.navigation.navigate('DashBoard')
-    //     // this.setState({ initilized: true });
-    //     // console.log("initilization response", response);
-    //     // ToastAndroid.show('Successful initilization', ToastAndroid.SHORT);
-    // })
-    // .catch((err) l̥=> {
-
-    //   this.hideLoader();
-    //     alert('Login Failed. Please check the credentials.');
-    //       // this.setState({ isLoading: false });
-    //     // this.setState({ initilized: false });
-    //     // console.log(9999, err.message)
-    //     // ToastAndroid.show('Try Again', ToastAndroid.SHORT);
-    // })
-    
-  
-      //  DeviceEventEmitter.addListener('CallReceived', (event) => this.onCallReceive(event));
-      //  KandyModule.initKandyService("oauth-cpaas.att.com", value.access_token, value.id_token)
-
-      //  loginManager.loginInApp(this.state.clientId,this.state.password,
-      //    this.state.email,this.state.url,(error, token)=>{
-      //      if(token != null) {
-      //        console.log(token);
-      //      //  this.props.navigation.navigate('DashBoard')
-      //        this.hideLoader();
-      //      } else {  
-      //        this.hideLoader();
-      //        alert('Login Failed. Please check the credentials.');
-      //      }      
-      //  });
     } else {
       alert('Please fill all the details.');
     }
@@ -126,36 +71,45 @@ class Login extends React.Component {
   render() {
     return (
       <View style={styles.container}>
-        <Text style={styles.Welcome_text}>
-          Welcome
-                  </Text>
+        <Text style={styles.Welcome_text}>Welcome</Text>
 
         <Text style={styles.Login_text}>
           Login to continue
                   </Text>
-                  <TextInput style={styles.input}
-          placeholder="Host URL"
+        <Text style={styles.Normal_text}>
+          Host URL
+                  </Text>
+        <TextInput style={styles.input}
+          placeholder="Example. oauth-cpaas.att.com"
           placeholderTextColor="black"
           autoCapitalize="none"
           value={this.state.input}
           onChangeText={this.handleUrl}
         />
+         <Text style={styles.Normal_text}>
+          Client ID
+                  </Text>
         <TextInput style={styles.input}
-          placeholder="Client Id"
+          placeholder="Example. PUB-nesonukuv.34mv"
           placeholderTextColor="black"
           autoCapitalize="none"
           onChangeText={this.handleClientId}
         />
+ <Text style={styles.Normal_text}>
+          Email
+                  </Text>
 
-     
         <TextInput style={styles.input}
-          placeholder="Email"
+          placeholder="Example. nesonukuv@planet-travel.club"
           placeholderTextColor="black"
           autoCapitalize="none"
           onChangeText={this.handleEmail}
         />
-   <TextInput style={styles.input}
-          placeholder="Password"
+         <Text style={styles.Normal_text}>
+          Password
+                  </Text>
+        <TextInput style={styles.input}
+          placeholder="Example. Test@123"
           placeholderTextColor="black"
           autoCapitalize="none"
           onChangeText={this.handlePassword}
@@ -188,6 +142,14 @@ const styles = StyleSheet.create({
     marginTop: 0,
     padding: 20,
     fontSize: 17,
+    fontWeight: 'normal'
+  }, Normal_text: {
+    marginTop: 0,
+    paddingTop: 0,
+    paddingBottom: 0,
+    paddingLeft: 20,
+    paddingRight: 0,
+    fontSize: 14,
     fontWeight: 'normal'
   },
   input: {

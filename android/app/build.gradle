@@ -129,12 +129,11 @@ android {
     }
 
     defaultConfig {
-        applicationId "com.awesomeproject"
+        applicationId "com.kandycpaas"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1
         versionName "1.0"
-        multiDexEnabled true
     }
     splits {
         abi {
@@ -189,17 +188,15 @@ android {
 }
 
 dependencies {
-    implementation 'com.kandy.mobile:kandycpaasmobilesdk:2.5.0@aar'
+    implementation 'com.kandy.mobile:kandycpaasmobilesdk:2.7.0@aar'
 //    implementation fileTree(dir: "libs", include: ["*.jar"])
     implementation 'com.squareup.retrofit2:converter-gson:2.5.0'
     implementation 'com.squareup.retrofit2:retrofit:2.5.0'
     implementation 'com.squareup.okhttp3:logging-interceptor:3.10.0'
-    implementation 'com.facebook.fresco:fresco:2.0.0'
-//    implementation fileTree(dir: "libs", include: ["*.aar"])
+    implementation fileTree(dir: "libs", include: ["*.jar"])
     //noinspection GradleDynamicVersion
-//    implementation (name:"kandycpaasmobilesdk-2.5.0", ext:"aar")
     implementation "com.facebook.react:react-native:+"  // From node_modules
-//    implementation 'com.kandy.mobile:kandycpaasmobilesdk:2.5.0'
+
     implementation "androidx.swiperefreshlayout:swiperefreshlayout:1.0.0"
 
     debugImplementation("com.facebook.flipper:flipper:${FLIPPER_VERSION}") {

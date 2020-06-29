@@ -1,146 +1,151 @@
-// import React, { Component } from 'react';
-// import {View,NativeModules,Alert} from 'react-native';
-// import { Input, Button } from 'react-native-elements';
+import React, { Component } from 'react';
+import { View, NativeModules, Alert } from 'react-native';
+import { Input, Button } from 'react-native-elements';
+const { AddressBookModule } = NativeModules;
+//var addressBookManager = NativeModules.AddressBook;
 
-// var addressBookManager = NativeModules.AddressBook;
+class UpdateContact extends React.Component {
+    static navigationOptions = {
+        title: 'UpdateContact',
+    };
 
-// class UpdateContact extends React.Component {
-//     static navigationOptions = {
-//       title: 'UpdateContact',
-//     };
-    
-//     state = {
-//       contactId: '',
-//       primaryContactId: '',
-//       firstName: '',
-//       lastName:'',
-//       emailAddress:'',
-//       homePhoneNumber:'',
-//       businessPhoneNumber:''
-//     }
+    state = {
+        contactId: '',
+        primaryContactId: '',
+        firstName: '',
+        lastName: '',
+        emailAddress: '',
+        homePhoneNumber: '',
+        businessPhoneNumber: ''
+    }
 
-//     componentDidMount(){
-//       contactData = this.props.route.params.contactData
+    componentDidMount() {
+        contactData = this.props.route.params.contactData
 
-//       var fname = contactData["firstName"]
-//       this.setState({ firstName:fname })
+        var fname = contactData["firstName"]
+        this.setState({ firstName: fname })
 
-//       var contactId = contactData["contactId"]
-//       this.setState({ primaryContactId:contactId })
+        var contactId = contactData["contactId"]
+        this.setState({ primaryContactId: contactId })
 
-//       var email = contactData["email"]
-//       this.setState({ emailAddress:email })
+        var email = contactData["email"]
+        this.setState({ emailAddress: email })
 
-//       var homePhoneNumber = contactData["homePhoneNumber"]
-//       this.setState({ homePhoneNumber:homePhoneNumber })
+        var homePhoneNumber = contactData["homePhoneNumber"]
+        this.setState({ homePhoneNumber: homePhoneNumber })
 
-//       var businessPhoneNumber = contactData["businessPhoneNumber"]
-//       this.setState({ businessPhoneNumber:businessPhoneNumber })
+        var businessPhoneNumber = contactData["businessPhoneNumber"]
+        this.setState({ businessPhoneNumber: businessPhoneNumber })
 
-//       var lastName = contactData["lastName"]
-//       this.setState({ lastName:lastName })
-      
-//   }
+        var lastName = contactData["lastName"]
+        this.setState({ lastName: lastName })
 
-//    componentWillUnmount() {
+    }
 
-//     }
+    componentWillUnmount() {
 
-//     handleContactId = (text) => {
-//       this.state.contactId = text;
-//     }
+    }
 
-//     handlePrimaryContactId = (text) => {
-//       this.state.primaryContactId = text;
-//     }
+    handleContactId = (text) => {
+        this.state.contactId = text;
+    }
 
-//     handleFirstName = (text) => {
-//       this.state.firstName = text;
-//     }
+    handlePrimaryContactId = (text) => {
+        this.state.primaryContactId = text;
+    }
 
-//     handleLastName = (text) => {
-//       this.state.lastName = text;
-//     }
+    handleFirstName = (text) => {
+        this.state.firstName = text;
+    }
 
-//     handleEmailAddress = (text) => {
-//       this.state.emailAddress = text;
-//     }
+    handleLastName = (text) => {
+        this.state.lastName = text;
+    }
 
-//     handleHomePhoneNumber = (text) => {
-//       this.state.homePhoneNumber = text;
-//     }
+    handleEmailAddress = (text) => {
+        this.state.emailAddress = text;
+    }
 
-//     handleBusinessPhoneNumber = (text) => {
-//       this.state.businessPhoneNumber = text;
-//     }
+    handleHomePhoneNumber = (text) => {
+        this.state.homePhoneNumber = text;
+    }
 
-//     handleUpdate = () => {
-//       if(this.state.contactId && this.state.primaryContactId  && this.state.firstName  && 
-//           this.state.lastName  && this.state.emailAddress != "" && 
-//           this.state.businessPhoneNumber != ""  && 
-//           this.state.homePhoneNumber != "") {
-//           var data = {}
-//           data = {
-//               contactId: this.state.contactId,
-//               email: this.state.emailAddress,
-//               firstName: this.state.firstName,
-//               lastName: this.state.lastName,
-//               homePhoneNumber: this.state.homePhoneNumber,
-//               businessPhoneNumber: this.state.businessPhoneNumber,
-//             };
-//             const myObjStr = JSON.stringify(data);
-//             addressBookManager.updateContact(myObjStr,(error, message)=>{
-//               if(error != null) {
-//                    alert('Error in adding contact.');
-//               } else {
-//                    alert('Contact added successfully.');
-//               }
-//             });
-//         } else {
-//               alert('Please fill all the details.');
-//         }
-//     }
+    handleBusinessPhoneNumber = (text) => {
+        this.state.businessPhoneNumber = text;
+    }
 
-//     render() {
+    handleUpdate = () => {
+        if (this.state.contactId && this.state.primaryContactId && this.state.firstName &&
+            this.state.lastName && this.state.emailAddress != "" &&
+            this.state.businessPhoneNumber != "" &&
+            this.state.homePhoneNumber != "") {
+            var data = {}
+            data = {
+                contactId: this.state.contactId,
+                email: this.state.emailAddress,
+                firstName: this.state.firstName,
+                lastName: this.state.lastName,
+                homePhoneNumber: this.state.homePhoneNumber,
+                businessPhoneNumber: this.state.businessPhoneNumber,
+            };
+            const myObjStr = JSON.stringify(data);
+            AddressBookModule.updateContact(myObjStr, (error, message) => {
+                if (error == 'Success') {
+                    alert('Contact added successfully.');
+                  } else {
+                    alert('Error in adding contact.');
+                  }
+                  if (error != null) {
+                   
+                } else {
+                   
+                }
+            });
+        } else {
+            alert('Please fill all the details.');
+        }
+    }
 
-//       return (
-//         <View>
-//         <Input
-//            placeholder='Contact Id'
-//            onChangeText = {this.handleContactId}
-//        />
-//          <Input
-//            placeholder='Primary Contact'
-//            onChangeText = {this.handlePrimaryContactId}
-//        />
-//          <Input
-//            placeholder='First Name'
-//            onChangeText = {this.handleFirstName}
-//        />
-//          <Input
-//            placeholder='Last name'
-//            onChangeText = {this.handleLastName}
-//        />
-//          <Input
-//            placeholder='Email Address'
-//            onChangeText = {this.handleEmailAddress}
-//        />
-//          <Input
-//            placeholder='Home Phone Number'
-//            onChangeText = {this.handleHomePhoneNumber}
-//        />
-//          <Input
-//            placeholder='Business Phone Number'
-//            onChangeText = {this.handleBusinessPhoneNumber}
-//        />
+    render() {
 
-//         <Button 
-//           title="Update Contact"
-//           onPress = {this.handleUpdate}
-//         />
-//         </View>
-//     );
-//     }
-// }
+        return (
+            <View>
+                <Input
+                    placeholder='Contact Id'
+                    onChangeText={this.handleContactId}
+                />
+                <Input
+                    placeholder='Primary Contact'
+                    onChangeText={this.handlePrimaryContactId}
+                />
+                <Input
+                    placeholder='First Name'
+                    onChangeText={this.handleFirstName}
+                />
+                <Input
+                    placeholder='Last name'
+                    onChangeText={this.handleLastName}
+                />
+                <Input
+                    placeholder='Email Address'
+                    onChangeText={this.handleEmailAddress}
+                />
+                <Input
+                    placeholder='Home Phone Number'
+                    onChangeText={this.handleHomePhoneNumber}
+                />
+                <Input
+                    placeholder='Business Phone Number'
+                    onChangeText={this.handleBusinessPhoneNumber}
+                />
 
-// export default UpdateContact; 
+                <Button
+                    title="Update Contact"
+                    onPress={this.handleUpdate}
+                />
+            </View>
+        );
+    }
+}
+
+export default UpdateContact; 

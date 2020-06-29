@@ -1,4 +1,4 @@
-package com.awesomeproject.remote.models;
+package com.kandycpaas.remote.models;
 
 import com.google.gson.annotations.SerializedName;
 

@@ -2,7 +2,7 @@ import React from 'react';
 import { StyleSheet, Text, View, FlatList, Dimensions , TouchableWithoutFeedback} from 'react-native';
 
 const data = [
-  { key: 'SMS' }, { key: 'Chat' }, { key: 'Persence' } , { key: 'AddressBook' } , { key: 'Directory' }
+  { key: 'SMS' }, { key: 'Chat' }, { key: 'AddressBook' } , { key: 'Directory' }
 ];
 
 const formatData = (data, numColumns) => {
@@ -30,7 +30,7 @@ class DashBoard extends React.Component {
         break;
  
       case 'Persence':
-        this.props.navigation.navigate('Persence')
+      //  this.props.navigation.navigate('Persence')
         break;
 
       case 'AddressBook':

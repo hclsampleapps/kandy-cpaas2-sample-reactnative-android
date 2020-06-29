@@ -1,6 +1,4 @@
-package com.awesomeproject;
-
-import android.util.Log;
+package com.kandycpaas;
 
 import com.facebook.react.bridge.ReactApplicationContext;
 import com.facebook.react.bridge.ReactContextBaseJavaModule;
@@ -18,7 +16,6 @@ import com.rbbn.cpaas.mobile.utilities.services.ServiceInfo;
 import com.rbbn.cpaas.mobile.utilities.services.ServiceType;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class SMSModule extends ReactContextBaseJavaModule {
     ReactApplicationContext context;
@@ -46,13 +43,13 @@ public class SMSModule extends ReactContextBaseJavaModule {
         smsConversation.send(message, new MessagingCallback() {
             @Override
             public void onSuccess() {
-                Log.d("CPaaS.SMSService", "Message is sent");
+                android.util.Log.d("CPaaS.SMSService", "Message is sent");
                 successCallback.invoke("Success", "Message is sent");
             }
 
             @Override
             public void onFail(MobileError error) {
-                Log.d("CPaaS.SMSService", "Message is failed");
+                android.util.Log.d("CPaaS.SMSService", "Message is failed");
                 successCallback.invoke("Fail", "Message is failed");
             }
         });
@@ -67,7 +64,7 @@ public class SMSModule extends ReactContextBaseJavaModule {
 
         MainApplication applicationContext = (MainApplication) context.getApplicationContext();
 
-        List<ServiceInfo> services = new ArrayList<>();
+        java.util.List<ServiceInfo> services = new ArrayList<>();
         services.add(new ServiceInfo(ServiceType.SMS, true));
 
         CPaaS cpass = applicationContext.getCpass();
@@ -77,7 +74,7 @@ public class SMSModule extends ReactContextBaseJavaModule {
         smsService.setSMSListener(new SMSListener() {
             @Override
             public void inboundSMSMessageReceived(InboundMessage inboundMessage) {
-                Log.d("CPaaS.SMSService", "New message from " + inboundMessage.getSenderAddress() + inboundMessage.getMessage());
+                android.util.Log.d("CPaaS.SMSService", "New message from " + inboundMessage.getSenderAddress() + inboundMessage.getMessage());
 
                 context.getJSModule(DeviceEventManagerModule.RCTDeviceEventEmitter.class)
                         .emit("SMSmessageReceived", "New message from " + inboundMessage.getSenderAddress() + inboundMessage.getMessage());
@@ -93,12 +90,12 @@ public class SMSModule extends ReactContextBaseJavaModule {
 
             @Override
             public void SMSDeliveryStatusChanged(String s, String s1, String s2) {
-                Log.d("CPaaS.SMSService", "Message delivery status changed to " + s1);
+                android.util.Log.d("CPaaS.SMSService", "Message delivery status changed to " + s1);
             }
 
             @Override
             public void outboundSMSMessageSent(OutboundMessage outboundMessage) {
-                Log.d("CPaaS.SMSService", "Message is sent to " + outboundMessage.getSenderAddress());
+                android.util.Log.d("CPaaS.SMSService", "Message is sent to " + outboundMessage.getSenderAddress());
 
 
             }

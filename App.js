@@ -18,6 +18,9 @@ import DashBoard from './Screens/DashBoard';
 import Chat from './Screens/Chat';
 import SMS from './Screens/SMS';
 import AddressBook from './Screens/AddressBook';
+import UpdateContact from './Screens/UpdateContact';
+import Directory from './Screens/Directory';
+import Persence from './Screens/Persence';
 const Stack = createStackNavigator();
 
 export default class App extends Component{ 
@@ -96,7 +99,48 @@ export default class App extends Component{
         }}
         component={AddressBook}
       />
-
+         <Stack.Screen
+        name="UpdateContact"
+        options={{
+          title: 'UpdateContact',
+          headerStyle: {
+            backgroundColor: '#0391C2',
+          },
+          headerTintColor: '#fff',
+          headerTitleStyle: {
+            fontWeight: 'bold',
+          },
+        }}
+        component={UpdateContact}
+      />
+  <Stack.Screen
+        name="Directory"
+        options={{
+          title: 'Directory',
+          headerStyle: {
+            backgroundColor: '#0391C2',
+          },
+          headerTintColor: '#fff',
+          headerTitleStyle: {
+            fontWeight: 'bold',
+          },
+        }}
+        component={Directory}
+      />
+       <Stack.Screen
+        name="Persence"
+        options={{
+          title: 'Persence',
+          headerStyle: {
+            backgroundColor: '#0391C2',
+          },
+          headerTintColor: '#fff',
+          headerTitleStyle: {
+            fontWeight: 'bold',
+          },
+        }}
+        component={Persence}
+      />
     </Stack.Navigator>
     </NavigationContainer>      
   );

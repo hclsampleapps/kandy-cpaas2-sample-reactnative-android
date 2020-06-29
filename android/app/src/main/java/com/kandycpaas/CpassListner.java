@@ -1,4 +1,4 @@
-package com.awesomeproject;
+package com.kandycpaas;
 
 public interface CpassListner {
 

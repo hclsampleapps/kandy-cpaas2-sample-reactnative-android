@@ -1,66 +1,65 @@
 import React, { Component } from 'react';
 
 import {
-    
-    StyleSheet,
-    
-    View,
-    Text,
-    
-    NativeModules,
-    
-    
-    TouchableOpacity,
-    DeviceEventEmitter,
-    FlatList,
-    ActivityIndicator
+
+  StyleSheet,
+
+  View,
+  Text,
+
+  NativeModules,
+
+
+  TouchableOpacity,
+  DeviceEventEmitter,
+  FlatList,
+  ActivityIndicator
 } from 'react-native';
 const { AddressBookModule } = NativeModules;
-//var addressBookManager = NativeModules.AddressBook;
-//var addressBookEvents = new NativeEventEmitter(NativeModules.AddressBook)
 
 class AddressBook extends React.Component {
-    static navigationOptions = {
-      title: 'AddressBook',
-    };
-    constructor(props) {
-        super(props);
-         DeviceEventEmitter.addListener('AddressBookReceived', (event) => this.onAddressBook(event));
-    
-      }
-      onAddressBook = (event) => {
-        alert('Chat Received Successfully!');
-    };
+  static navigationOptions = {
+    title: 'AddressBook',
+  };
+  constructor(props) {
+    super(props);
+    contactList: []
+    DeviceEventEmitter.addListener('AddressBookReceived', (event) => this.onAddressBook(event));
 
-    state = {
-        destinationId: '',
-        messageText: '',
-        contactList:[]
+  }
+  onAddressBook = (event) => {
+    alert('Chat Received Successfully!');
+  };
+
+  state = {
+    destinationId: '',
+    messageText: '',
+    contactList: []
   }
 
-  showLoader = () => { this.setState({ showLoader:true }); };
-  hideLoader = () => { this.setState({ showLoader:false }); };
+  showLoader = () => { this.setState({ showLoader: true }); };
+  hideLoader = () => { this.setState({ showLoader: false }); };
 
-  componentDidMount(){
+  componentDidMount() {
     this.showLoader();
-    AddressBookModule.initAddressBookModule((error, response) =>{
+    AddressBookModule.initAddressBookModule((error, response) => {
+      console.log(response);
+      if (error == 'Success') {
+        this.setState({ contactList: JSON.parse(response) });
         console.log(response);
-        if (error =='Success') {
-         this.setState({ contactList: response });
-         console.log(response);
-          this.hideLoader();
-          console.log("Address module initialize"+response);
-      }else{
+        this.hideLoader();
+        console.log("Address module initialize" + response);
+      } else {
         console.log("Address module error");
       }
     });
-   }
+  }
 
-   componentWillUnmount() {
-        this.state.contactList.length = 0
-   }
+  componentWillUnmount() {
+    this.state.contactList.length = 0
+  }
 
-   FlatListItemSeparator = () => {
+  FlatListItemSeparator = () => {
     return (
       <View
         style={{
@@ -70,55 +69,55 @@ class AddressBook extends React.Component {
         }}
       />
     );
-   }
+  }
 
-   actionOnRow(item) {
-    console.log('Selected Item :',item);
-    this.props.navigation.push('UpdateContact',{
+  actionOnRow(item) {
+    console.log('Selected Item :', item);
+    this.props.navigation.push('UpdateContact', {
       contactData: item
     })
     this.props.navigation.navigate('UpdateContact')
-   }
+  }
 
-    render() {
-      return (
+  render() {
+    return (
       <View>
-      <View style={{ position: 'absolute', top:"100%",right: 0, left: 0 }}>
-                 <ActivityIndicator animating={this.state.showLoader} size="large" color="grey" />
-      </View>
-      <FlatList
-        data={this.state.contactList}
-        keyExtractor={(item, index) => index.toString()}
-        ItemSeparatorComponent = { this.FlatListItemSeparator }
-        renderItem={({ item }) => (
-          <TouchableOpacity onPress={ () => this.actionOnRow(item)}>
-                <View>
-                <View style={{ flexDirection: 'row'}}>
-                        <Text style={styles.cell_text}>{item.firstName}</Text>
-                    </View>
-                </View>
-                <View>
+        <View style={{ position: 'absolute', top: "100%", right: 0, left: 0 }}>
+          <ActivityIndicator animating={this.state.showLoader} size="large" color="grey" />
+        </View>
+        <FlatList
+          data={this.state.contactList}
+          keyExtractor={(item, index) => index.toString()}
+          ItemSeparatorComponent={this.FlatListItemSeparator}
+          renderItem={({ item }) => (
+            <TouchableOpacity onPress={() => this.actionOnRow(item)}>
+              <View>
                 <View style={{ flexDirection: 'row' }}>
-                        <Text style={styles.cell_text}>{item.email}</Text>
-                    </View>
+                  <Text style={styles.cell_text}>{"First Name : "+item.firstName}</Text>
                 </View>
-          </TouchableOpacity>
-        )}
+              </View>
+              <View>
+                <View style={{ flexDirection: 'row' }}>
+                  <Text style={styles.cell_text}>{"Email : "+ item.email}</Text>
+                </View>
+              </View>
+            </TouchableOpacity>
+          )}
 
         />
 
-        </View> 
+      </View>
     );
-    }
   }
+}
 
-const styles = StyleSheet.create({   
+const styles = StyleSheet.create({
   cell_text: {
     marginTop: 10,
     marginBottom: 20,
     marginLeft: 20,
-    fontSize:12
+    fontSize: 12
   },
-});  
+});
 
 export default AddressBook; 

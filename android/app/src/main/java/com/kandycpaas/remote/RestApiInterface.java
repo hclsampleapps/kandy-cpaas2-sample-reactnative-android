@@ -1,8 +1,8 @@
-package com.awesomeproject.remote;
+package com.kandycpaas.remote;
 
 
 
-import com.awesomeproject.remote.models.LoginResponse;
+import com.kandycpaas.remote.models.LoginResponse;
 
 import retrofit2.Call;
 import retrofit2.http.Field;

@@ -1,12 +1,10 @@
-package com.awesomeproject;
+package com.kandycpaas;
 
 import android.widget.Toast;
 
-import androidx.annotation.NonNull;
-
-import com.awesomeproject.remote.RestApiClient;
-import com.awesomeproject.remote.RestApiInterface;
-import com.awesomeproject.remote.models.LoginResponse;
+import com.kandycpaas.remote.RestApiClient;
+import com.kandycpaas.remote.RestApiInterface;
+import com.kandycpaas.remote.models.LoginResponse;
 import com.facebook.react.bridge.ReactApplicationContext;
 import com.facebook.react.bridge.ReactContextBaseJavaModule;
 import com.facebook.react.bridge.ReactMethod;
@@ -40,11 +38,13 @@ public class LoginModule extends ReactContextBaseJavaModule {
 
         Retrofit client = RestApiClient.getClient("https://" + url);
         if (client == null) {
+            successCallback.invoke("Fail", "Failed Login");
             Toast.makeText(context, "Please enter correct Fields", Toast.LENGTH_SHORT).show();
             return;
         }
         mRestApiInterface = client.create(RestApiInterface.class);
         if (mRestApiInterface == null) {
+            successCallback.invoke("Fail", "Failed Login");
             Toast.makeText(context, "Please enter correct Fields", Toast.LENGTH_SHORT).show();
             return;
         }
@@ -57,8 +57,8 @@ public class LoginModule extends ReactContextBaseJavaModule {
                 "openid");
         responseCall.enqueue(new Callback<LoginResponse>() {
             @Override
-            public void onResponse(@NonNull Call<LoginResponse> call,
-                                   @NonNull Response<LoginResponse> response) {
+            public void onResponse(@androidx.annotation.NonNull Call<LoginResponse> call,
+                                   @androidx.annotation.NonNull Response<LoginResponse> response) {
                 LoginResponse body = response.body();
                 if (body != null) {
 //                    Toast.makeText(LoginActivity.this, "Login Success", Toast.LENGTH_SHORT).show();
@@ -91,9 +91,9 @@ public class LoginModule extends ReactContextBaseJavaModule {
             }
 
             @Override
-            public void onFailure(@NonNull Call<LoginResponse> call, @NonNull Throwable t) {
+            public void onFailure(@androidx.annotation.NonNull Call<LoginResponse> call, @androidx.annotation.NonNull Throwable t) {
                 call.cancel();
-
+                successCallback.invoke("Fail", "Failed Login");
             }
         });
     }

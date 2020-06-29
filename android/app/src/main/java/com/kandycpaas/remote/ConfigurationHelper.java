@@ -1,4 +1,4 @@
-package com.awesomeproject.remote;
+package com.kandycpaas.remote;
 
 import com.rbbn.cpaas.mobile.utilities.Configuration;
 import com.rbbn.cpaas.mobile.utilities.logging.LogLevel;
