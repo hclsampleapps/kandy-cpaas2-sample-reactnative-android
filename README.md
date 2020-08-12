@@ -2,7 +2,7 @@
 ReactNative based sample app of CPaaS2 modules (SMS, Chat, Presence, Address book)
 
 ### Install as Android App
-You can download the .apk file from [releases](https://github.com/hclsampleapps/kandy-cpaas2-sample-android/releases) section.
+You can download the .apk file from [releases](https://github.com/hclsampleapps/kandy-cpaas2-sample-reactnative-androi/releases) section.
 If you are a developer, then you can generate the apk from source code.
 
 ### Available Features
@@ -38,7 +38,7 @@ $ git clone https://github.com/ribbon-abku/kandy-cpaas2-sample-reactnative-andro
 
 1. Get inside the cloned/downloaded repository as 
 ```shell
-$ cd CPaaS_ReactNative_Android   
+$ cd kandy-cpaas2-sample-reactnative-android   
 ```
 2. Install all dependencies, via
 ```shell
