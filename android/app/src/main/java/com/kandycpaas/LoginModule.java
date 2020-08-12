@@ -61,26 +61,16 @@ public class LoginModule extends ReactContextBaseJavaModule {
                                    @androidx.annotation.NonNull Response<LoginResponse> response) {
                 LoginResponse body = response.body();
                 if (body != null) {
-//                    Toast.makeText(LoginActivity.this, "Login Success", Toast.LENGTH_SHORT).show();
-//                    Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
-//                    intent.putExtra(access_token, body.getAccessToken());
-//                    intent.putExtra(id_token, body.getIdToken());
-//                    intent.putExtra(base_url, mBaseUrl.getText().toString());
-//                    intent.putExtra(login_type, isPasswordGrantLoginType);
                     MainApplication app = (MainApplication) context.getApplicationContext();
                     app.setCpass(url, body.getAccessToken(), body.getIdToken(), new CpassListner() {
                         @Override
                         public void onCpassSuccess() {
                             successCallback.invoke("Success", "Logged In Successfully");
-//                            context.getJSModule(DeviceEventManagerModule.RCTDeviceEventEmitter.class)
-//                                    .emit("LoginSuccess", body.getAccessToken());
                         }
 
                         @Override
                         public void onCpassFail() {
                             successCallback.invoke("Fail", "Failed Login");
-//                            context.getJSModule(DeviceEventManagerModule.RCTDeviceEventEmitter.class)
-//                                    .emit("LoginSuccess", "fail");
                         }
                     });
 

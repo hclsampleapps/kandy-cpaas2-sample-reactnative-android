@@ -6,6 +6,8 @@ import com.facebook.react.bridge.ReactMethod;
 import com.facebook.react.modules.core.DeviceEventManagerModule;
 import com.rbbn.cpaas.mobile.CPaaS;
 import com.rbbn.cpaas.mobile.messaging.api.InboundMessage;
+import com.rbbn.cpaas.mobile.messaging.api.MessageDeliveryStatus;
+import com.rbbn.cpaas.mobile.messaging.api.MessageState;
 import com.rbbn.cpaas.mobile.messaging.api.MessagingCallback;
 import com.rbbn.cpaas.mobile.messaging.api.OutboundMessage;
 import com.rbbn.cpaas.mobile.messaging.chat.api.ChatConversation;
@@ -63,11 +65,10 @@ public class ChatModule extends ReactContextBaseJavaModule {
                 context.getJSModule(DeviceEventManagerModule.RCTDeviceEventEmitter.class)
                         .emit("ChatmessageReceived", "New message from " + inboundMessage.getSenderAddress()
                                 + inboundMessage.getMessage());
-//
             }
 
             @Override
-            public void chatDeliveryStatusChanged(String s, String s1, String s2) {
+            public void chatDeliveryStatusChanged(String s, MessageDeliveryStatus messageDeliveryStatus, String s1) {
                 android.util.Log.d("CPaaS.ChatService", "Message delivery status changed to " + s1);
             }
 
@@ -82,7 +83,7 @@ public class ChatModule extends ReactContextBaseJavaModule {
             }
 
             @Override
-            public void isComposingReceived(String s, String s1, long l) {
+            public void isComposingReceived(String s, MessageState messageState, long l) {
 
             }
 

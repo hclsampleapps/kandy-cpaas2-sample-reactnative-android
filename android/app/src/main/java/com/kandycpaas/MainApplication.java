@@ -42,15 +42,8 @@ public class MainApplication extends Application implements ReactApplication {
         Configuration.getInstance().setLogLevel(LogLevel.TRACE);
         ConfigurationHelper.setConfigurations(baseUrl);
         Globals.setApplicationContext(context);
-//        cPaaSCallManager.setContext(context);
 
         mCpaas = initKandyService(mAccessToken, idToken, cpassListner);
-//        try {
-//            this.mCpaas.getCallService().setCallApplicationListener(cPaaSCallManager);
-//        } catch (MobileException e) {
-//            e.printStackTrace();
-//        }
-
     }
     @NonNull
     private static List<ServiceInfo> getServiceInfos() {

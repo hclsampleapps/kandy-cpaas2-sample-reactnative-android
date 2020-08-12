@@ -19,8 +19,6 @@ public class MyPackage implements com.facebook.react.ReactPackage {
                 new DirectoryModule(reactContext),
                 new PresenceModule(reactContext),
                 new ChatModule(reactContext)
-//                ,
-//                new VideoViewManager()
         );
     }
 }

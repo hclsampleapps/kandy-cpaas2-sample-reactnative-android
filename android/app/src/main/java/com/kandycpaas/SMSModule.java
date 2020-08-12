@@ -6,6 +6,7 @@ import com.facebook.react.bridge.ReactMethod;
 import com.facebook.react.modules.core.DeviceEventManagerModule;
 import com.rbbn.cpaas.mobile.CPaaS;
 import com.rbbn.cpaas.mobile.messaging.api.InboundMessage;
+import com.rbbn.cpaas.mobile.messaging.api.MessageDeliveryStatus;
 import com.rbbn.cpaas.mobile.messaging.api.MessagingCallback;
 import com.rbbn.cpaas.mobile.messaging.api.OutboundMessage;
 import com.rbbn.cpaas.mobile.messaging.sms.api.SMSConversation;
@@ -78,18 +79,10 @@ public class SMSModule extends ReactContextBaseJavaModule {
 
                 context.getJSModule(DeviceEventManagerModule.RCTDeviceEventEmitter.class)
                         .emit("SMSmessageReceived", "New message from " + inboundMessage.getSenderAddress() + inboundMessage.getMessage());
-//
-// SMSModel smsModel = new SMSModel(
-//                        inboundMessage.getMessage(),
-//                        inboundMessage.getSenderAddress(),
-//                        true,
-//                        inboundMessage.getMessageId()
-//                );
-//                notifyList(smsModel);
             }
 
             @Override
-            public void SMSDeliveryStatusChanged(String s, String s1, String s2) {
+            public void SMSDeliveryStatusChanged(String s, MessageDeliveryStatus messageDeliveryStatus, String s1) {
                 android.util.Log.d("CPaaS.SMSService", "Message delivery status changed to " + s1);
             }
 
@@ -102,6 +95,5 @@ public class SMSModule extends ReactContextBaseJavaModule {
         });
 
         successCallback.invoke("Success", "SMS module initialize");
-
     }
 }

@@ -123,23 +123,12 @@ public class DirectoryModule extends ReactContextBaseJavaModule {
         CPaaS cpass = applicationContext.getCpass();
         mAddressBookService = cpass.getAddressBookService();
         try {
-//            String mCriteria;
-//            JSONObject job = new JSONObject(data);
             FieldType mSearchFilterType = getSearchFilterType(1);
             SearchFilter searchFilter = new SearchFilter(mSearchFilterType, mCriteria);
             Search search = new Search(searchFilter);
             search.sortBy(getSearchFilterType(1));
             search.order(getSearchOrder(1));
             search.limit(10);
-            //   Search contact ;//= new Search()
-//            contact.setPrimaryContact(job.getString("contactId"));
-//            contact.setFirstName(job.getString("firstName"));
-//            contact.setLastName(job.getString("lastName"));
-//            contact.setEmailAddress(job.getString("email"));
-//            contact.setBusinessPhoneNumber(job.getString("businessPhoneNumber"));
-//            contact.setHomePhoneNumber(job.getString("homePhoneNumber"));
-//            contact.setMobilePhoneNumber(job.getString("homePhoneNumber"));
-//            contact.setBuddy(true);
             mAddressBookService.search(search, new SearchCallback() {
                 @Override
                 public void onSuccess(SearchResult searchResult) {

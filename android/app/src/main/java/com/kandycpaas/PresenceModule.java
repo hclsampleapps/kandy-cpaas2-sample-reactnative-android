@@ -66,9 +66,6 @@ public class PresenceModule extends ReactContextBaseJavaModule {
                     successCallback.invoke("Fail", "Message is failed");
                 }
 
-//                for (PresenceList presenceList : mPresenceLists) {
-//                    subscribeForPresenceUpdates(presenceList);
-//                }
             }
 
             @Override
@@ -89,6 +86,4 @@ public class PresenceModule extends ReactContextBaseJavaModule {
     }
 
     PresenceService mPresenceService;
-
-
 }
