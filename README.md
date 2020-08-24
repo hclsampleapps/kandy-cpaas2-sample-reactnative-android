@@ -22,7 +22,7 @@ $ npm install -g react-native-cli
 ```
 3. Clone the project, via
 ```shell
-$ git clone https://github.com/ribbon-abku/kandy-cpaas2-sample-reactnative-android.git
+$ git clone https://github.com/hclsampleapps/kandy-cpaas2-sample-reactnative-android.git
 ```
    Alternatively, you can directly download it as well.
 
