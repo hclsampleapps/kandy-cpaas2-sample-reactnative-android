@@ -65,7 +65,7 @@ $ react-native start
 ##### Notes
 
  - Existing user can confirm their account via [Log in to AT&T API Marketplace](https://apimarket.att.com/login)
- - You can download *kandy.js* from [Developer documentation - SDKs](https://apimarket.att.com/developer/sdks/javascript)
+ - You can download *SDK* from [Developer documentation - SDKs](https://apimarket.att.com/developer/sdks/android)
  - For more information about React-native [React-native documentation](https://facebook.github.io/react-native/docs/getting-started)
 
 ## Contribute
