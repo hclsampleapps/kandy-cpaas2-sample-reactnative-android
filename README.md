@@ -1,9 +1,8 @@
 # kandy-cpaas2-sample-reactnative-android
-ReactNative based sample app of CPaaS2 modules (SMS, Chat, Presence, Address book)
+ReactNative based app of CPaaS modules is used to create communication channel between two users via SMS, Chat, Presence and Address book.
 
-### Install as Android App
-You can download the .apk file from [releases](https://github.com/hclsampleapps/kandy-cpaas2-sample-reactnative-android/releases) section.
-If you are a developer, then you can generate the apk from source code.
+## Introduction 
+This app is used to establish a communication channel between 2 or more users via available Kandy SDK for *SMS*, *Chat* along with other features like *Presence* & *Directory*.
 
 ### Available Features
 - [x] SMS
@@ -12,14 +11,7 @@ If you are a developer, then you can generate the apk from source code.
 - [x] Address-book & Directory
 - [ ] Presence
 
-### Run this Android App
-1. Open Android App
-2. Enter the credentials of a user.
-
-### Execute commands for development
-1. Setup repository via `git clone https://github.com/hclsampleapps/kandy-cpaas2-sample-reactnative-android`
-2. Resolve build dependency via sync gradle in android studio
-3. Generate final build by android studio
+## Getting Started
 
 ### Setup
 
@@ -40,18 +32,20 @@ $ git clone https://github.com/ribbon-abku/kandy-cpaas2-sample-reactnative-andro
 ```shell
 $ cd kandy-cpaas2-sample-reactnative-android   
 ```
-2. Install all dependencies, via
+2. Resolve build dependency via sync gradle in android studio
+3. Install all dependencies, via
 ```shell
 $ npm install
 ```
-3. Run and build the app, via
+4. Run and build the app, via
 ```shell
 $ react-native run-android
 ```
-4. Start server, via
+5. Start server, via
 ```shell
 $ react-native start
 ```
+6. Generate final build by android studio
 
 ### User manual 
 
@@ -68,6 +62,11 @@ $ react-native start
 7. Click ***Login***
 8. After successful login you can proceed further accordingly.
 
+##### Notes
+
+ - Existing user can confirm their account via [Log in to AT&T API Marketplace](https://apimarket.att.com/login)
+ - You can download *kandy.js* from [Developer documentation - SDKs](https://apimarket.att.com/developer/sdks/javascript)
+ - For more information about React-native [React-native documentation](https://facebook.github.io/react-native/docs/getting-started)
 
 ## Contribute
 
