@@ -1,5 +1,5 @@
 # kandy-cpaas2-sample-reactnative-android
-ReactNative based app of CPaaS modules is used to create communication channel between two users via SMS, Chat, Presence and Address book.
+ReactNative based app of CPaaS modules (SMS, Chat, Presence and Address book) is used to create communication channel between two users.
 
 ## Introduction 
 This app is used to establish a communication channel between 2 or more users via available Kandy SDK for *SMS*, *Chat* along with other features like *Presence* & *Directory*.
@@ -12,6 +12,24 @@ This app is used to establish a communication channel between 2 or more users vi
 - [ ] Presence
 
 ## Getting Started
+
+### User manual 
+
+1. Create an account on **AT&T** portal via [Register now for a free account](https://apimarket.att.com/signup).
+2. Open application in 2 android devices with *User1* and *User2*.
+3. Enter the *server URL*, for e.g.,
+	- For AT&T API Marketplace [apimarket.att.com](https://apimarket.att.com), enter `https://oauth-cpaas.att.com`
+4. Choose to get accessToken by *Password Grant* flow.
+5. Login using two different users' credentials in application.
+6. For **Password Grant** flow, enter 
+	- *clientId* 
+	- *emailId* 
+	- *password*   
+7. Click ***Login***
+8. After successful login you can proceed further accordingly.
+
+## Build and Test
+Setup the repository to build the code and run the app. 
 
 ### Setup
 
@@ -46,6 +64,8 @@ $ react-native run-android
 $ react-native start
 ```
 6. Generate final build by android studio
+
+## Getting Started
 
 ### User manual 
 
