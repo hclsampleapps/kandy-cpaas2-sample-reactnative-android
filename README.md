@@ -65,29 +65,6 @@ $ react-native start
 ```
 6. Generate final build by android studio
 
-## Getting Started
-
-### User manual 
-
-1. Create an account on **AT&T** portal via [Register now for a free account](https://apimarket.att.com/signup).
-2. Open application in 2 android devices with *User1* and *User2*.
-3. Enter the *server URL*, for e.g.,
-	- For AT&T API Marketplace [apimarket.att.com](https://apimarket.att.com), enter `https://oauth-cpaas.att.com`
-4. Choose to get accessToken by *Password Grant* flow.
-5. Login using two different users' credentials in application.
-6. For **Password Grant** flow, enter 
-	- *clientId* 
-	- *emailId* 
-	- *password*   
-7. Click ***Login***
-8. After successful login you can proceed further accordingly.
-
-##### Notes
-
- - Existing user can confirm their account via [Log in to AT&T API Marketplace](https://apimarket.att.com/login)
- - You can download *SDK* from [Developer documentation - SDKs](https://apimarket.att.com/developer/sdks/android)
- - For more information about React-native [React-native documentation](https://facebook.github.io/react-native/docs/getting-started)
-
 ## Contribute
 
 #### Branching strategy
