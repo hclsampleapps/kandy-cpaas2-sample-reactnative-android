@@ -2,7 +2,7 @@
 ReactNative based sample app of CPaaS2 modules (SMS, Chat, Presence, Address book)
 
 ### Install as Android App
-You can download the .apk file from [releases](https://github.com/hclsampleapps/kandy-cpaas2-sample-reactnative-androi/releases) section.
+You can download the .apk file from [releases](https://github.com/hclsampleapps/kandy-cpaas2-sample-reactnative-android/releases) section.
 If you are a developer, then you can generate the apk from source code.
 
 ### Available Features
