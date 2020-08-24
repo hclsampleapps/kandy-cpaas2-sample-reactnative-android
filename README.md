@@ -1,45 +1,25 @@
 # kandy-cpaas2-sample-reactnative-android
-ReactNative based audio-video app is used to create communication channel between two users via Voice/Video APIs
+ReactNative based sample app of CPaaS2 modules (SMS, Chat, Presence, Address book)
 
-## Introduction 
-This app is used to establish a communication channel between 2 or more users via available Kandy APIs for *SMS*, *Chat* & *Voice/Video* along with other UC features like *Presence* & *Directory*.
+### Install as Android App
+You can download the .apk file from [releases](https://github.com/hclsampleapps/kandy-cpaas2-sample-reactnative-androi/releases) section.
+If you are a developer, then you can generate the apk from source code.
 
 ### Available Features
 - [x] SMS
 - [x] Chat
 - [ ] Voice/Video
 - [x] Address-book & Directory
-- [x] Presence
+- [ ] Presence
 
-## Getting Started
+### Run this Android App
+1. Open Android App
+2. Enter the credentials of a user.
 
-### User manual 
-
-1. Create an account on **AT&T** portal via [Register now for a free account](https://apimarket.att.com/signup).
-2. Open 2 instances of `index.html` in the browser for *User1* and *User2*.
-3. Enter the *server URL*, for e.g.,
-	- For AT&T API Marketplace [apimarket.att.com](https://apimarket.att.com), enter `https://oauth-cpaas.att.com`
-4. Choose to get accessToken by *Password Grant* flow or *Client Credentials* flow.
-5. Login using two different users' credentials in both the browser windows.
-6. For **Password Grant** flow, enter 
-	- *clientId* 
-	- *emailId* 
-	- *password*  
-7. For **Client Credentials Grant** flow, enter
-	- *privateKey*
-	- *privateSecret*   
-8. Click ***Login***
-7. After successful login you can proceed further accordingly.
-
-##### Notes
-
- - Existing user can confirm their account via [Log in to AT&T API Marketplace](https://apimarket.att.com/login)
- - You can download *kandy.js* from [Developer documentation - SDKs](https://apimarket.att.com/developer/sdks/javascript)
- - For more information about React-native [React-native documentation](https://facebook.github.io/react-native/docs/getting-started)
-
-
-## Build and Test
-Setup the repository to build the code and run the app. 
+### Execute commands for development
+1. Setup repository via `git clone https://github.com/hclsampleapps/kandy-cpaas2-sample-reactnative-android`
+2. Resolve build dependency via sync gradle in android studio
+3. Generate final build by android studio
 
 ### Setup
 
@@ -58,7 +38,7 @@ $ git clone https://github.com/ribbon-abku/kandy-cpaas2-sample-reactnative-andro
 
 1. Get inside the cloned/downloaded repository as 
 ```shell
-$ cd CPaaS_ReactNative_Android   
+$ cd kandy-cpaas2-sample-reactnative-android   
 ```
 2. Install all dependencies, via
 ```shell
@@ -73,15 +53,44 @@ $ react-native run-android
 $ react-native start
 ```
 
-###  Troubleshooting tips
+### Branching strategy
+We are following **GitFlow** as the branching strategy and for release management.
 
-1.  Install Android SDK.
-2.  Add path in environment.
-3.  Install JDK latest version.
-4.  Connect one android device or emulator.
+The central repo holds two main branches with an infinite lifetime:
 
-## Contribute
+- master
+- develop
 
-#### Branching strategy
+The `master` branch at origin should be familiar to every Git user. Parallel to the `master` branch, another branch exists called `develop`.
 
-To learn about the branching strategy, contribution & coding conventions followed in the project, please refer [GitFlow based branching strategy for your project repository](https://gist.github.com/ribbon-abku/10d3fc1cff5c35a2df401196678e258a)
+We consider `origin/master` to be the main branch where the source code of HEAD always reflects a *production-ready* state.
+
+We consider `origin/develop` to be the main branch where the source code of HEAD always reflects a state with the latest delivered development changes for the next release.
+
+#### Supporting branches
+Next to the main branches `master` and `develop`, our development model uses a variety of supporting branches to aid parallel development between team members.
+
+The different types of branches we may use are:
+
+- Feature branches
+- Release branches
+- Hotfix branches
+
+### Contributing
+Fork the repository. Then, run:
+
+```
+git clone --recursive git@github.com:<username>/gitflow.git
+cd kandy-cpaas2-sample-android
+git branch master origin/master
+git flow init -d
+git checkout develop
+git flow feature start <your feature>
+```
+
+Then, do work and commit your changes. When your `feature` is completed, raise the pull-request against `develop`.
+
+To know more about *GitFlow*, please refer
+
+- [Introducing GitFlow](https://datasift.github.io/gitflow/IntroducingGitFlow.html)
+- [A successful Git branching model](https://nvie.com/posts/a-successful-git-branching-model/)
