@@ -16,7 +16,7 @@ This app is used to establish a communication channel between 2 or more users vi
 ### User manual 
 
 1. Create an account on **AT&T** portal via [Register now for a free account](https://apimarket.att.com/signup).
-2. Download the .apk file from [releases](https://github.com/hclsampleapps/kandy-cpaas2-sample-reactnative-android/releases) section ( If you are a developer, then you can generate the apk from source code).
+2. Download the .apk file from [releases](https://github.com/hclsampleapps/kandy-cpaas2-sample-reactnative-android/releases) section (Developers can directly generate the apk from source code).
 3. Open application in 2 android devices with *User1* and *User2*.
 4. Enter the *server URL*, for e.g.,
 	- For AT&T API Marketplace [apimarket.att.com](https://apimarket.att.com), enter `https://oauth-cpaas.att.com`
