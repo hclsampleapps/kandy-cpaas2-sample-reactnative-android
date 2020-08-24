@@ -53,44 +53,24 @@ $ react-native run-android
 $ react-native start
 ```
 
-### Branching strategy
-We are following **GitFlow** as the branching strategy and for release management.
+### User manual 
 
-The central repo holds two main branches with an infinite lifetime:
+1. Create an account on **AT&T** portal via [Register now for a free account](https://apimarket.att.com/signup).
+2. Open application in 2 android devices with *User1* and *User2*.
+3. Enter the *server URL*, for e.g.,
+	- For AT&T API Marketplace [apimarket.att.com](https://apimarket.att.com), enter `https://oauth-cpaas.att.com`
+4. Choose to get accessToken by *Password Grant* flow.
+5. Login using two different users' credentials in application.
+6. For **Password Grant** flow, enter 
+	- *clientId* 
+	- *emailId* 
+	- *password*   
+7. Click ***Login***
+8. After successful login you can proceed further accordingly.
 
-- master
-- develop
 
-The `master` branch at origin should be familiar to every Git user. Parallel to the `master` branch, another branch exists called `develop`.
+## Contribute
 
-We consider `origin/master` to be the main branch where the source code of HEAD always reflects a *production-ready* state.
+#### Branching strategy
 
-We consider `origin/develop` to be the main branch where the source code of HEAD always reflects a state with the latest delivered development changes for the next release.
-
-#### Supporting branches
-Next to the main branches `master` and `develop`, our development model uses a variety of supporting branches to aid parallel development between team members.
-
-The different types of branches we may use are:
-
-- Feature branches
-- Release branches
-- Hotfix branches
-
-### Contributing
-Fork the repository. Then, run:
-
-```
-git clone --recursive git@github.com:<username>/gitflow.git
-cd kandy-cpaas2-sample-android
-git branch master origin/master
-git flow init -d
-git checkout develop
-git flow feature start <your feature>
-```
-
-Then, do work and commit your changes. When your `feature` is completed, raise the pull-request against `develop`.
-
-To know more about *GitFlow*, please refer
-
-- [Introducing GitFlow](https://datasift.github.io/gitflow/IntroducingGitFlow.html)
-- [A successful Git branching model](https://nvie.com/posts/a-successful-git-branching-model/)
+To learn about the branching strategy, contribution & coding conventions followed in the project, please refer [GitFlow based branching strategy for your project repository](https://gist.github.com/ribbon-abku/10d3fc1cff5c35a2df401196678e258a)
