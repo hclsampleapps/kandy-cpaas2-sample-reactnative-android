@@ -18,7 +18,7 @@ class Login extends React.Component {
   state = {
     email: '',
     password: '',
-    url: 'oauth-cpaas.att.com',
+    url: '',
     clientId: '',
     sourceNumber: '',
     destinationNumber: '',
@@ -80,7 +80,7 @@ class Login extends React.Component {
           Host URL
                   </Text>
         <TextInput style={styles.input}
-          placeholder="Example. oauth-cpaas.att.com"
+          placeholder="baseurl.domain.com"
           placeholderTextColor="black"
           autoCapitalize="none"
           value={this.state.input}
@@ -90,7 +90,7 @@ class Login extends React.Component {
           Client ID
                   </Text>
         <TextInput style={styles.input}
-          placeholder="Example. PUB-abcdefgh.12ab"
+          placeholder="PUB-project.name"
           placeholderTextColor="black"
           autoCapitalize="none"
           onChangeText={this.handleClientId}
@@ -100,7 +100,7 @@ class Login extends React.Component {
                   </Text>
 
         <TextInput style={styles.input}
-          placeholder="Example. tonystark@domain.com"
+          placeholder="user1@domain.com"
           placeholderTextColor="black"
           autoCapitalize="none"
           onChangeText={this.handleEmail}
@@ -109,7 +109,7 @@ class Login extends React.Component {
           Password
                   </Text>
         <TextInput style={styles.input}
-          placeholder="Example. abc@123"
+          placeholder="Test@123"
           placeholderTextColor="black"
           autoCapitalize="none"
           onChangeText={this.handlePassword}
