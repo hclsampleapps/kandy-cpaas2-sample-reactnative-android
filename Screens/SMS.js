@@ -87,7 +87,7 @@ class SMS extends React.Component {
                     Source Number
                   </Text>
                 <TextInput style={styles.input}
-                    placeholder="Example. +12011234567"
+                    placeholder="Example. +1234567890"
                     placeholderTextColor="black"
                     autoCapitalize="none"
                     onChangeText={this.handleSourceNumber}
@@ -96,7 +96,7 @@ class SMS extends React.Component {
                     Destination Number
                   </Text>
                 <TextInput style={styles.input}
-                    placeholder="Example. +12011234567"
+                    placeholder="Example. +1234567890"
                     placeholderTextColor="black"
                     autoCapitalize="none"
                     onChangeText={this.handleDestinationNumber}

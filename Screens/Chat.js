@@ -79,7 +79,7 @@ class Chat extends React.Component {
           Destination Id
                   </Text>
         <TextInput style={styles.input}
-          placeholder="Example nesonukuv@nesonukuv.34mv.att.com"
+          placeholder="Example abcdefg@domain.12ab.att.com"
           placeholderTextColor="black"
           autoCapitalize="none"
           onChangeText={this.handleDestinationId}
