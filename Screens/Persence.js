@@ -15,9 +15,6 @@ import {
 
 const { PresenceModule } = NativeModules;
 
-// var persenceManager = NativeModules.Persence;
-// var persenceEvents = new NativeEventEmitter(NativeModules.Persence)
-
 class Persence extends React.Component {
     static navigationOptions = {
         title: 'Persence',
@@ -38,7 +35,7 @@ class Persence extends React.Component {
     }
 
     onPresenceReceive = (event) => {
-//        alert('Message Received Successfully!');
+
     };
 
     showLoader = () => { this.setState({ showLoader: true }); };

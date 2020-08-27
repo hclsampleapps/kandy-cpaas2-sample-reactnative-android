@@ -90,7 +90,7 @@ class Login extends React.Component {
           Client ID
                   </Text>
         <TextInput style={styles.input}
-          placeholder="Example. PUB-nesonukuv.34mv"
+          placeholder="Example. PUB-abcdefgh.12ab"
           placeholderTextColor="black"
           autoCapitalize="none"
           onChangeText={this.handleClientId}
@@ -100,7 +100,7 @@ class Login extends React.Component {
                   </Text>
 
         <TextInput style={styles.input}
-          placeholder="Example. nesonukuv@planet-travel.club"
+          placeholder="Example. tonystark@domain.com"
           placeholderTextColor="black"
           autoCapitalize="none"
           onChangeText={this.handleEmail}
@@ -109,7 +109,7 @@ class Login extends React.Component {
           Password
                   </Text>
         <TextInput style={styles.input}
-          placeholder="Example. Test@123"
+          placeholder="Example. abc@123"
           placeholderTextColor="black"
           autoCapitalize="none"
           onChangeText={this.handlePassword}
