@@ -29,10 +29,6 @@ class DashBoard extends React.Component {
         this.props.navigation.navigate('Chat')
         break;
  
-      case 'Persence':
-      //  this.props.navigation.navigate('Persence')
-        break;
-
       case 'AddressBook':
         this.props.navigation.navigate('AddressBook')
         break;  
@@ -83,7 +79,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     flex: 1,
     margin: 1,
-    height: Dimensions.get('window').width / numColumns, // approximate a square
+    height: Dimensions.get('window').width / numColumns,
   },
   itemInvisible: {
     backgroundColor: 'transparent',

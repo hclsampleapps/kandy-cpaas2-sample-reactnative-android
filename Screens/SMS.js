@@ -61,8 +61,7 @@ class SMS extends React.Component {
 
         if (this.state.destinationNumber && this.state.sourceNumber && this.state.messageText != "") {
             this.showLoader();
-            //   var loginManager = NativeModules.login;
-      
+         
             SMSModule.initSendMessage(this.state.destinationNumber, this.state.sourceNumber, this.state.messageText, (error, message) => {
                 if (error == 'Success') {
                     console.log(message);
@@ -87,7 +86,7 @@ class SMS extends React.Component {
                     Source Number
                   </Text>
                 <TextInput style={styles.input}
-                    placeholder="Example. +1234567890"
+                    placeholder="Example. +16543219873"
                     placeholderTextColor="black"
                     autoCapitalize="none"
                     onChangeText={this.handleSourceNumber}
@@ -96,7 +95,7 @@ class SMS extends React.Component {
                     Destination Number
                   </Text>
                 <TextInput style={styles.input}
-                    placeholder="Example. +1234567890"
+                    placeholder="Example. +16543219874"
                     placeholderTextColor="black"
                     autoCapitalize="none"
                     onChangeText={this.handleDestinationNumber}
@@ -105,7 +104,7 @@ class SMS extends React.Component {
                     Enter Message
                   </Text>
                 <TextInput style={styles.input}
-                    placeholder="Example. Hi John"
+                    placeholder="Example. Hi Tony"
                     placeholderTextColor="black"
                     autoCapitalize="none"
                     onChangeText={this.handleMessageText}
