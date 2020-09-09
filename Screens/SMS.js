@@ -5,6 +5,7 @@ import {
     View, Text,
     NativeModules,
     Button,
+	 ActivityIndicator,
     TextInput,
     DeviceEventEmitter
 } from 'react-native';
@@ -12,6 +13,8 @@ import {
 const { SMSModule } = NativeModules;
 
 class SMS extends React.Component {
+	showLoader = () => { this.setState({ showLoader: true }); };
+    hideLoader = () => { this.setState({ showLoader: false }); };
     static navigationOptions = {
         title: 'SMS',
     };
@@ -19,7 +22,8 @@ class SMS extends React.Component {
     state = {
         sourceNumber: '',
         destinationNumber: '',
-        messageText: ''
+        messageText: '',
+		showLoader: false
     }
 
     constructor(props) {
@@ -65,9 +69,11 @@ class SMS extends React.Component {
             SMSModule.initSendMessage(this.state.destinationNumber, this.state.sourceNumber, this.state.messageText, (error, message) => {
                 if (error == 'Success') {
                     console.log(message);
+					this.hideLoader();
                     alert(message);
                 } else {
                     console.log(message);
+					this.hideLoader();
                     alert(message);
                 }
             });
@@ -109,6 +115,10 @@ class SMS extends React.Component {
                     autoCapitalize="none"
                     onChangeText={this.handleMessageText}
                 />
+				 <View style={{ position: 'absolute', top: "50%", right: 0, left: 0 }}>
+					<ActivityIndicator animating={this.state.showLoader} size="large" color="grey" />
+				</View>
+
 
                 <Button style={styles.buttonStyle}
                     title="Send SMS"

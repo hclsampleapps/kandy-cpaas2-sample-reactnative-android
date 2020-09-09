@@ -34,7 +34,8 @@ class AddressBook extends React.Component {
   state = {
     destinationId: '',
     messageText: '',
-    contactList: []
+    contactList: [],
+		showLoader: false
   }
 
   showLoader = () => { this.setState({ showLoader: true }); };
