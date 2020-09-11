@@ -20,7 +20,6 @@ import SMS from './Screens/SMS';
 import AddressBook from './Screens/AddressBook';
 import UpdateContact from './Screens/UpdateContact';
 import Directory from './Screens/Directory';
-import Persence from './Screens/Persence';
 const Stack = createStackNavigator();
 
 export default class App extends Component{ 
