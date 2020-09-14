@@ -8,6 +8,7 @@ import {
   NativeModules,
   Button,
   TextInput,
+   ActivityIndicator,
   DeviceEventEmitter
 
 } from 'react-native';
@@ -21,8 +22,13 @@ class Chat extends React.Component {
 
   state = {
     destinationId: '',
-    messageText: ''
+    messageText: '',
+	showLoader: false
   }
+
+  showLoader = () => { this.setState({ showLoader: true }); };
+  hideLoader = () => { this.setState({ showLoader: false }); };
+
   constructor(props) {
     super(props);
     DeviceEventEmitter.addListener('ChatmessageReceived', (event) => this.onChatReceive(event));
@@ -60,8 +66,10 @@ class Chat extends React.Component {
       ChatModule.sendChat(this.state.destinationId, this.state.messageText, (error, message) => {
         if (error == 'Success') {
           console.log(message);
+		  this.hideLoader();
           alert(message);
         } else {
+			this.hideLoader();
           console.log(message);
           alert(message);
         }
@@ -94,6 +102,10 @@ class Chat extends React.Component {
           autoCapitalize="none"
           onChangeText={this.handleMessageText}
         />
+		 <View style={{ position: 'absolute', top: "50%", right: 0, left: 0 }}>
+          <ActivityIndicator animating={this.state.showLoader} size="large" color="grey" />
+        </View>
+
 
         <Button style={styles.buttonStyle}
           title="Send Chat"
